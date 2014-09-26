@@ -39,8 +39,6 @@ public class MainActivity extends Activity
 
         gridView.setAdapter(customGridAdapter);
 
-        int a = 0;
-
         gridView.setOnItemClickListener(new OnItemClickListener()
         {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id)
