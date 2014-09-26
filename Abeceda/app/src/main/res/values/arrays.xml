@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="image_ids">
+        <item>@drawable/a</item>
+        <item>@drawable/b</item>
+        <item>@drawable/c</item>
+        <item>@drawable/cjj</item>
+        <item>@drawable/cj</item>
+        <item>@drawable/d</item>
+        <item>@drawable/dzj</item>
+        <item>@drawable/dj</item>
+        <item>@drawable/e</item>
+        <item>@drawable/f</item>
+        <item>@drawable/g</item>
+        <item>@drawable/h</item>
+        <item>@drawable/i</item>
+        <item>@drawable/j</item>
+        <item>@drawable/k</item>
+        <item>@drawable/l</item>
+        <item>@drawable/lj</item>
+        <item>@drawable/m</item>
+        <item>@drawable/n</item>
+        <item>@drawable/nj</item>
+        <item>@drawable/o</item>
+        <item>@drawable/p</item>
+        <item>@drawable/r</item>
+        <item>@drawable/s</item>
+        <item>@drawable/sj</item>
+        <item>@drawable/t</item>
+        <item>@drawable/u</item>
+        <item>@drawable/v</item>
+        <item>@drawable/z</item>
+        <item>@drawable/zj</item>
+    </string-array>
+
+    <string-array name="audio_ids">
+        <item>@raw/a</item>
+        <item>@raw/b</item>
+        <item>@raw/c</item>
+        <item>@raw/cjj</item>
+        <item>@raw/cj</item>
+        <item>@raw/d</item>
+        <item>@raw/dzj</item>
+        <item>@raw/dj</item>
+        <item>@raw/e</item>
+        <item>@raw/f</item>
+        <item>@raw/g</item>
+        <item>@raw/h</item>
+        <item>@raw/i</item>
+        <item>@raw/j</item>
+        <item>@raw/k</item>
+        <item>@raw/l</item>
+        <item>@raw/lj</item>
+        <item>@raw/m</item>
+        <item>@raw/n</item>
+        <item>@raw/nj</item>
+        <item>@raw/o</item>
+        <item>@raw/p</item>
+        <item>@raw/r</item>
+        <item>@raw/s</item>
+        <item>@raw/sj</item>
+        <item>@raw/t</item>
+        <item>@raw/u</item>
+        <item>@raw/v</item>
+        <item>@raw/z</item>
+        <item>@raw/zj</item>
+        <item>@raw/abecedaintro</item>
+    </string-array>
+
+    <string-array name="cloudImage_ids">
+        <item>@drawable/a_cloud</item>
+        <item>@drawable/b_cloud</item>
+        <item>@drawable/c_cloud</item>
+        <item>@drawable/cjj_cloud</item>
+        <item>@drawable/cj_cloud</item>
+        <item>@drawable/d_cloud</item>
+        <item>@drawable/djj_cloud</item>
+        <item>@drawable/dj_cloud</item>
+        <item>@drawable/e_cloud</item>
+        <item>@drawable/f_cloud</item>
+        <item>@drawable/g_cloud</item>
+        <item>@drawable/h_cloud</item>
+        <item>@drawable/i_cloud</item>
+        <item>@drawable/j_cloud</item>
+        <item>@drawable/k_cloud</item>
+        <item>@drawable/l_cloud</item>
+        <item>@drawable/lj_cloud</item>
+        <item>@drawable/m_cloud</item>
+        <item>@drawable/n_cloud</item>
+        <item>@drawable/nj_cloud</item>
+        <item>@drawable/o_cloud</item>
+        <item>@drawable/p_cloud</item>
+        <item>@drawable/r_cloud</item>
+        <item>@drawable/s_cloud</item>
+        <item>@drawable/sj_cloud</item>
+        <item>@drawable/t_cloud</item>
+        <item>@drawable/u_cloud</item>
+        <item>@drawable/v_cloud</item>
+        <item>@drawable/z_cloud</item>
+        <item>@drawable/zj_cloud</item>
+    </string-array>
+
+</resources>

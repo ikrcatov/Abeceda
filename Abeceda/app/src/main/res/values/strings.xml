@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Abeceda</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="exitApplication">Exit</string>
+    <string name="title_activity_image_slide">ImageSlideActivity</string>
+    <string name="title_activity_splash">Splash</string>
+    <string name="action_settings">Settings</string>
+
+</resources>
