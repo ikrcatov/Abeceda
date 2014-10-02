@@ -48,11 +48,12 @@ public class ImageSlideActivity extends FragmentActivity
         position = bdl.getInt("position");
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
+
         context = this;
 
         viewPager.setOnTouchListener(gestureListener);
 
-        /*SWIPE events*/
+        //SWIPE events
         viewPager.setOnTouchListener(new OnSwipeTouchListener(this)
         {
             private float pointX;
@@ -67,23 +68,7 @@ public class ImageSlideActivity extends FragmentActivity
                     swiped = true;
                     position = position - 1;
 
-                    adapter = new ImageAdapter(context, position);
-                    viewPager.setAdapter(adapter);
-
-                    //Necessary or the pager will only have one extra page to show
-                    // make this at least however many pages you can see
-                    viewPager.setOffscreenPageLimit(adapter.getCount());
-                    //A little space between pages
-                    viewPager.setPageMargin(15);
-
-                    //If hardware acceleration is enabled, you should also remove
-                    // clipping on the pager for its children.
-                    viewPager.setClipChildren(false);
-                    viewPager.setCurrentItem(position);
-
-                    mp = new MediaPlayer();
-                    mp = MediaPlayer.create(context, mAudio[position]);
-                    mp.start();
+                    setViewPagerValuesAndStartMediaPlayer(viewPager);
                 }
             }
             public void onSwipeLeft()
@@ -95,23 +80,7 @@ public class ImageSlideActivity extends FragmentActivity
                     swiped = true;
                     position = position + 1;
 
-                    adapter = new ImageAdapter(context, position);
-                    viewPager.setAdapter(adapter);
-
-                    //Necessary or the pager will only have one extra page to show
-                    // make this at least however many pages you can see
-                    viewPager.setOffscreenPageLimit(adapter.getCount());
-                    //A little space between pages
-                    viewPager.setPageMargin(15);
-
-                    //If hardware acceleration is enabled, you should also remove
-                    // clipping on the pager for its children.
-                    viewPager.setClipChildren(false);
-                    viewPager.setCurrentItem(position);
-
-                    mp = new MediaPlayer();
-                    mp = MediaPlayer.create(context, mAudio[position]);
-                    mp.start();
+                    setViewPagerValuesAndStartMediaPlayer(viewPager);
                 }
             }
 
@@ -150,25 +119,34 @@ public class ImageSlideActivity extends FragmentActivity
 
         if(swiped == false)
         {
-            adapter = new ImageAdapter(this, position);
-            viewPager.setAdapter(adapter);
-
-            //Necessary or the pager will only have one extra page to show
-            // make this at least however many pages you can see
-            viewPager.setOffscreenPageLimit(adapter.getCount());
-            //A little space between pages
-            viewPager.setPageMargin(15);
-
-            //If hardware acceleration is enabled, you should also remove
-            // clipping on the pager for its children.
-            viewPager.setClipChildren(false);
-
-            viewPager.setCurrentItem(position);
-
-            mp = new MediaPlayer();
-            mp = MediaPlayer.create(context, mAudio[position]);
-            mp.start();
+            setViewPagerValuesAndStartMediaPlayer(viewPager);
         }
+    }
+
+    private void setViewPagerValuesAndStartMediaPlayer(ViewPager viewPager)
+    {
+        adapter = new ImageAdapter(context, position);
+        viewPager.setAdapter(adapter);
+
+        //Necessary or the pager will only have one extra page to show
+        // make this at least however many pages you can see
+        viewPager.setOffscreenPageLimit(adapter.getCount());
+        //A little space between pages
+        viewPager.setPageMargin(15);
+
+        //If hardware acceleration is enabled, you should also remove
+        // clipping on the pager for its children.
+        viewPager.setClipChildren(false);
+        viewPager.setCurrentItem(position);
+
+        /*VIDLJIVOST SWIPE LEFT I RIGHT SLIJEDECE SLIKE*/
+        viewPager.setPadding(20, 0, 20, 0);
+        viewPager.setClipToPadding(false);
+        viewPager.setPageMargin(10);
+
+        mp = new MediaPlayer();
+        mp = MediaPlayer.create(context, mAudio[position]);
+        mp.start();
     }
 
     @Override

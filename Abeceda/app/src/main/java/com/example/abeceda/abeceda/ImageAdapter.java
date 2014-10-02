@@ -5,10 +5,13 @@ import android.content.res.Resources;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.TypedValue;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 public class ImageAdapter extends PagerAdapter
 {
@@ -60,7 +63,7 @@ public class ImageAdapter extends PagerAdapter
         imageView.setLayoutParams(new GridView.LayoutParams((int)px, (int)px));
         imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
 
-        ((ViewPager) container).addView(imageView, 0);
+        ((ViewPager) container).addView(imageView);
 
         return imageView;
     }
