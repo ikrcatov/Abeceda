@@ -30,6 +30,12 @@
             android:theme="@android:style/Theme.NoTitleBar"
             android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name=".ImageViewPager"
+            android:label="@string/title_activity_image_slide"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 
     <supports-screens android:xlargeScreens="true" />

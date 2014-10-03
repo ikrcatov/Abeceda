@@ -1,24 +1,56 @@
 package com.example.abeceda.abeceda;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.util.TypedValue;
-import android.view.LayoutInflater;
+import android.media.MediaPlayer;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridView;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
-public class ImageAdapter extends PagerAdapter
+public class ImageAdapter extends BaseAdapter
 {
-	Context context;
-    int imagePosition = 0;
+    private Context mContext;
 
-    public int[] IMAGES = new int[]
+    /*Sound*/
+    MediaPlayer mp;
+
+    public ImageAdapter(Context c) {
+        mContext = c;
+    }
+
+    public int getCount() {
+        return mThumbIds.length;
+    }
+
+    public Object getItem(int position) {
+    	return mThumbIds[position];
+    }
+
+    public long getItemId(int position) {
+        return 0;
+    }
+
+    // Create a new ImageView for each item referenced by the Adapter
+    public View getView(int position, View convertView, ViewGroup parent)
+    {
+        ImageView imageView;
+
+        if (convertView == null)
+        {  // If it's not recycled, initialize some attributes
+            imageView = new ImageView(mContext);
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        }
+        else
+        {
+            imageView = (ImageView) convertView;
+        }
+
+        imageView.setImageResource(mThumbIds[position]);
+        return imageView;
+    }
+
+    // References to our images in res > drawable
+    public Integer[] mThumbIds =
     {
         R.drawable.a, R.drawable.b, R.drawable.c, R.drawable.cjj, R.drawable.cj, R.drawable.d, R.drawable.dzj,
         R.drawable.dj, R.drawable.e, R.drawable.f, R.drawable.g, R.drawable.h, R.drawable.i, R.drawable.j,
@@ -27,50 +59,12 @@ public class ImageAdapter extends PagerAdapter
         R.drawable.zj
     };
 
-    ImageAdapter(Context context, int position)
+    public int[] mAudio = new int[]
     {
-    	this.context = context;
-        this.imagePosition = position;
-    }
-
-    @Override
-    public int getCount()
-    {
-      return IMAGES.length;
-    }
-
-    @Override
-    public boolean isViewFromObject(View view, Object object)
-    {
-        return view == ((ImageView) object);
-    }
-
-    @Override
-    public Object instantiateItem(ViewGroup container, int position)
-    {
-        ImageView imageView = new ImageView(context);
-        int padding = context.getResources().getDimensionPixelSize(
-                R.dimen.padding_medium);
-        //imageView.setPadding(padding, padding, padding, padding);
-        //imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-        imageView.setImageResource(IMAGES[imagePosition]);
-
-        //Calculation of ImageView Size - density independent.
-        //maybe you should do this calculation not exactly in this method but put is somewhere else.
-        Resources r = Resources.getSystem();
-        float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 60, r.getDisplayMetrics());
-
-        imageView.setLayoutParams(new GridView.LayoutParams((int)px, (int)px));
-        imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-
-        ((ViewPager) container).addView(imageView);
-
-        return imageView;
-    }
-
-    @Override
-    public void destroyItem(ViewGroup container, int position, Object object)
-    {
-        ((ViewPager) container).removeView((ImageView) object);
-    }
+        R.raw.a, R.raw.b, R.raw.c, R.raw.cjj, R.raw.cj, R.raw.d, R.raw.dzj,
+        R.raw.dj, R.raw.e, R.raw.f, R.raw.g, R.raw.h, R.raw.i, R.raw.j,
+        R.raw.k, R.raw.l, R.raw.lj, R.raw.m, R.raw.n, R.raw.nj, R.raw.o, R.raw.p,
+        R.raw.r, R.raw.s, R.raw.sj, R.raw.t, R.raw.u, R.raw.v, R.raw.z,
+        R.raw.zj
+    };
 }

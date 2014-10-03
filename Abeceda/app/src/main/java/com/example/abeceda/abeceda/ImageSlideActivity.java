@@ -51,7 +51,7 @@ public class ImageSlideActivity extends FragmentActivity
 
         context = this;
 
-        viewPager.setOnTouchListener(gestureListener);
+        /*viewPager.setOnTouchListener(gestureListener);
 
         //SWIPE events
         viewPager.setOnTouchListener(new OnSwipeTouchListener(this)
@@ -120,13 +120,13 @@ public class ImageSlideActivity extends FragmentActivity
         if(swiped == false)
         {
             setViewPagerValuesAndStartMediaPlayer(viewPager);
-        }
+        }*/
     }
 
     private void setViewPagerValuesAndStartMediaPlayer(ViewPager viewPager)
     {
-        adapter = new ImageAdapter(context, position);
-        viewPager.setAdapter(adapter);
+        /*adapter = new ImageAdapter(context, position);
+        viewPager.setAdapter(adapter);*/
 
         //Necessary or the pager will only have one extra page to show
         // make this at least however many pages you can see

@@ -44,7 +44,7 @@ public class MainActivity extends Activity
             public void onItemClick(AdapterView<?> parent, View v, int position, long id)
             {
                 int postion = position;
-                Intent i = new Intent(getApplicationContext(), ImageSlideActivity.class);
+                Intent i = new Intent(getApplicationContext(), ImageViewPager.class);
                 i.putExtra("position", postion);
                 startActivity(i);
             }
