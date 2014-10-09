@@ -1,20 +1,19 @@
 package com.example.abeceda.abeceda;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.app.Activity;
-import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
+import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ImageViewPager extends Activity
 {
@@ -24,21 +23,25 @@ public class ImageViewPager extends Activity
     /*Sound*/
     MediaPlayer mp;
 
-    private final int interval = 1000; // 1 Second
-    private Handler handler = new Handler();
-
-    boolean swiped = false;
-    boolean singleTapped = false;
-
-    /*LENGTH OF IMAGE ARRAY*/
-    int imageArrayLength;
-
     ViewPager viewpager;
 
     ImageAdapter imageAdapter;
     ImageViewPager context;
 
-    int savePosition = 0;
+    static List<ImageView> images = new ArrayList<ImageView>();
+    AudioAndImagePlaceholder audioAndImagePlaceholder = new AudioAndImagePlaceholder();
+
+    private final int interval = 1000; // 1 Second
+    private final int swipeInterval = 100;
+    private Handler handler = new Handler();
+
+    boolean singleTapped = false;
+
+    private float pointX;
+    private float pointY;
+    private int tolerance = 50;
+
+    private final GestureDetector gestureDetector = new GestureDetector(new GestureDetector.SimpleOnGestureListener());
 
     @Override
 	public void onCreate(Bundle savedInstanceState)
@@ -60,61 +63,83 @@ public class ImageViewPager extends Activity
 
         setViewPagerValuesAndStartMediaPlayer(viewpager, imageAdapter);
 
-        viewpager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        //viewpager.setOnTouchListener(new OnSwipeTouchListener(this, position){});
 
-            @Override
-            public void onPageSelected(int arg0) {}
-
-            @Override
-            public void onPageScrolled(int arg0, float arg1, int arg2) {
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int pos) {
-
-                if(savePosition > pos)
-                {
-                    Toast.makeText(getApplicationContext(), "Swiped Right", Toast.LENGTH_SHORT).show();
-                }
-
-                else if(savePosition < pos)
-                {
-                    Toast.makeText(getApplicationContext(), "Swiped Left", Toast.LENGTH_SHORT).show();
-                }
-
-                else
-                {
-                    Toast.makeText(getApplicationContext(), "Tap", Toast.LENGTH_SHORT).show();
-                }
-
-                savePosition = pos;
-                position = pos;
-            }
-        });
+        viewpager.setOnPageChangeListener(mOnPageListener);
+        viewpager.setOnTouchListener(onTouchListener);
 	}
+
+    public ViewPager.OnPageChangeListener mOnPageListener = new ViewPager.OnPageChangeListener()
+    {
+        @Override public void onPageSelected(int positionForSwipe)
+        {
+            position = positionForSwipe;
+            playMusic(positionForSwipe);
+        }
+
+        @Override public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
+        @Override public void onPageScrollStateChanged(int state) {}
+    };
+
+    public ViewPager.OnTouchListener onTouchListener = new View.OnTouchListener()
+    {
+        @Override
+        public boolean onTouch(View v, MotionEvent motionEvent)
+        {
+            if (motionEvent != null && motionEvent.getAction() == MotionEvent.ACTION_DOWN)
+            {
+                pointX = motionEvent.getX();
+                pointY = motionEvent.getY();
+            }
+
+            else if (motionEvent != null && motionEvent.getAction() == MotionEvent.ACTION_UP)
+            {
+                boolean sameX = pointX + tolerance > motionEvent.getX() && pointX - tolerance < motionEvent.getX();
+                boolean sameY = pointY + tolerance > motionEvent.getY() && pointY - tolerance < motionEvent.getY();
+
+                if (sameX && sameY)
+                {
+                    if (singleTapped == false)
+                    {
+                        if (position > 0 && position <= (audioAndImagePlaceholder.mAudio.length - 2))
+                        {
+                            playMusic(position);
+
+                            singleTapped = true;
+
+                            handler.postDelayed(runnable, interval);
+                        }
+                    }
+                }
+            }
+            return gestureDetector.onTouchEvent(motionEvent);
+        }
+    };
+
+    private void playMusic(int positionForSwipe)
+    {
+        if (mp != null && mp.isPlaying())
+        {
+            mp.stop();
+            mp.release();
+        }
+
+        mp = new MediaPlayer();
+        mp = MediaPlayer.create(context, audioAndImagePlaceholder.mAudio[positionForSwipe]);
+        mp.start();
+    }
 
     private void setViewPagerValuesAndStartMediaPlayer(ViewPager viewPager, ImageAdapter imageAdapter)
     {
-        List<ImageView> images = new ArrayList<ImageView>();
-
-        // Retrieve all the images
-        for (int i = 0; i < 15; i++)
-        {
-            ImageView imageView = new ImageView(this);
-            imageView.setImageResource(imageAdapter.mThumbIds[i]);
-            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-            images.add(imageView);
-        }
-
-        // Set the images into ViewPager
-        ImagePagerAdapter pageradapter = new ImagePagerAdapter(images);
+       // Set the images into ViewPager
+        ImagePagerAdapter pageradapter = new ImagePagerAdapter(images, this);
         viewpager.setAdapter(pageradapter);
         // Show images following the position
         viewpager.setCurrentItem(position);
+        viewpager.setOffscreenPageLimit(2);
 
         mp = new MediaPlayer();
-        mp = MediaPlayer.create(context, imageAdapter.mAudio[position]);
+        mp = MediaPlayer.create(context, audioAndImagePlaceholder.mAudio[position]);
         mp.start();
     }
 
@@ -122,6 +147,7 @@ public class ImageViewPager extends Activity
     public boolean onCreateOptionsMenu(Menu menu)
     {
         getMenuInflater().inflate(R.menu.image_slide, menu);
+
         return true;
     }
 

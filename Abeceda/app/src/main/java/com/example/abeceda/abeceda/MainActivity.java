@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 
@@ -21,6 +22,11 @@ public class MainActivity extends Activity
 {
     private GridView gridView;
     private GridViewAdapter customGridAdapter;
+
+    public ArrayList images = new ArrayList();
+    ImageView imageView;
+
+    AudioAndImagePlaceholder audioAndImagePlaceholder = new AudioAndImagePlaceholder();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -39,6 +45,8 @@ public class MainActivity extends Activity
 
         gridView.setAdapter(customGridAdapter);
 
+        retrieveImages();
+
         gridView.setOnItemClickListener(new OnItemClickListener()
         {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id)
@@ -46,6 +54,10 @@ public class MainActivity extends Activity
                 int postion = position;
                 Intent i = new Intent(getApplicationContext(), ImageViewPager.class);
                 i.putExtra("position", postion);
+
+                /*DA BI POSLAO OVU LISTU U DRUGI ACTIVITY, MORAMO U DRUGOM ACTIVITY LISTU PROGLASIT STATIC*/
+                ImageViewPager.images = images;
+
                 startActivity(i);
             }
         });
@@ -103,5 +115,17 @@ public class MainActivity extends Activity
                 })
                 .setNegativeButton("No", null)
                 .show();
+    }
+
+    private void retrieveImages()
+    {
+        // Retrieve all the images
+        for (int i = 0; i < audioAndImagePlaceholder.mThumbIds.length; i++)
+        {
+            imageView = new ImageView(this);
+            imageView.setImageResource(audioAndImagePlaceholder.mThumbIds[i]);
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+            images.add(imageView);
+        }
     }
 }
