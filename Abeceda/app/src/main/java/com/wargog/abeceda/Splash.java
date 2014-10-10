@@ -1,4 +1,4 @@
-package com.example.abeceda.abeceda;
+package com.wargog.abeceda;
 
 import android.app.Activity;
 import android.content.Intent;

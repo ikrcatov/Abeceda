@@ -1,4 +1,4 @@
-package com.example.abeceda.abeceda;
+package com.wargog.abeceda;
 
 public class AudioAndImagePlaceholder
 {
