@@ -1,6 +1,5 @@
-<?xml version="1.1" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.wargog.abeceda" >
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.wargog.abeceda">
 
     <application
         android:allowBackup="true"
