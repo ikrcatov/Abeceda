@@ -1,11 +1,13 @@
 package com.wargog.abeceda;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.view.GestureDetector;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -62,8 +64,6 @@ public class ImageViewPager extends Activity
         viewpager = (ViewPager) findViewById(R.id.view_pager);
 
         setViewPagerValuesAndStartMediaPlayer(viewpager, imageAdapter);
-
-        //viewpager.setOnTouchListener(new OnSwipeTouchListener(this, position){});
 
         viewpager.setOnPageChangeListener(mOnPageListener);
         viewpager.setOnTouchListener(onTouchListener);
@@ -136,7 +136,7 @@ public class ImageViewPager extends Activity
         viewpager.setAdapter(pageradapter);
         // Show images following the position
         viewpager.setCurrentItem(position);
-        viewpager.setOffscreenPageLimit(2);
+        viewpager.setOffscreenPageLimit(3);
 
         mp = new MediaPlayer();
         mp = MediaPlayer.create(context, audioAndImagePlaceholder.mAudio[position]);
@@ -169,4 +169,21 @@ public class ImageViewPager extends Activity
             singleTapped = false;
         }
     };
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if (keyCode == KeyEvent.KEYCODE_BACK)
+        {
+            /*viewpager.setCurrentItem(0, true);
+            return true;*/
+
+            Intent i = new Intent(this, MainActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(i);
+
+            finish();
+        }
+        return true;
+    }
 }

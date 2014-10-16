@@ -11,10 +11,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-/**
- * Created by Ivan on 29.8.2014..
- */
-
 public class GridViewAdapter extends ArrayAdapter
 {
     private Context context;

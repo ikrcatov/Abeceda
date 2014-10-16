@@ -14,8 +14,6 @@ public class ImagePagerAdapter extends PagerAdapter
     public List<ImageView> images = new ArrayList<ImageView>();
     Context context;
 
-    AudioAndImagePlaceholder audioAndImagePlaceholder = new AudioAndImagePlaceholder();
-
     public ImagePagerAdapter(List<ImageView> images, Context context)
     {
         this.images = images;
@@ -25,20 +23,31 @@ public class ImagePagerAdapter extends PagerAdapter
     @Override
     public Object instantiateItem(ViewGroup container, int position)
     {
-        ImageView imageView = images.get(position);
+        try
+        {
+            View v = images.get (position);
+            container.addView (v);
+            return v;
+        }
 
-        container.addView(imageView);
-
-        return imageView;
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object)
     {
-        if (container != null)
+        try
         {
-            if(images.get(position) != null)
-                container.removeView(images.get(position));
+            container.removeView (images.get (position));
+        }
+
+        catch(Exception e)
+        {
+            e.printStackTrace();
         }
     }
 
