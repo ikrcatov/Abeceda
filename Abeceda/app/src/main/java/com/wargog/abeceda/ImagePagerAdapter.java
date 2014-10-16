@@ -26,7 +26,17 @@ public class ImagePagerAdapter extends PagerAdapter
         try
         {
             View v = images.get (position);
-            container.addView (v);
+
+            if (v != null)
+            {
+                ViewGroup parent = (ViewGroup)v.getParent();
+
+                if(parent != null)
+                    parent.removeView(v);
+
+                container.addView (v);
+            }
+
             return v;
         }
 
