@@ -101,7 +101,7 @@ public class ImageViewPager extends Activity
                 {
                     if (singleTapped == false)
                     {
-                        if (position > 0 && position <= (audioAndImagePlaceholder.mAudio.length - 2))
+                        if (position >= 0 && position <= (audioAndImagePlaceholder.mAudio.length - 1))
                         {
                             playMusic(position);
 
